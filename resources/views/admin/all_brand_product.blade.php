@@ -3,7 +3,7 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Liệt kê danh mục sản phẩm
+                Liệt kê thương hiệu sản phẩm
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -47,28 +47,28 @@
                             <th style="width:30px;"></th>
                         </tr>
                     </thead>
-                     @foreach ( $all_category_product as $key => $cate_pro )
+                     @foreach ( $all_brand_product as $key => $brand_pro )
                     <tbody>
                         <tr>
                             <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                            <td>{{ $cate_pro -> category_name }}</td>
+                            <td>{{ $brand_pro -> brand_name }}</td>
                             <td><span class="text-ellipsis">
                                 <?php
-                                    if ($cate_pro -> category_status == 0) {
+                                    if ($brand_pro -> brand_status == 0) {
                                 ?>
-                                        <a href="{{ URL::to('/unactive-category-product/'.$cate_pro->category_id) }}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
+                                        <a href="{{ URL::to('/unactive-brand-product/'.$brand_pro->brand_id) }}"><span class="fa-thumb-styling fa fa-thumbs-up"></span></a>
                                 <?php    
                                     }else {
                                 ?>
-                                        <a href="{{ URL::to('/active-category-product/'.$cate_pro->category_id) }}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
+                                        <a href="{{ URL::to('/active-brand-product/'.$brand_pro->brand_id) }}"><span class="fa-thumb-styling fa fa-thumbs-down"></span></a>
                                 <?php
                                     }
                                 ?>
                             </span></td>
                             <td>
-                                <a href="{{ URL::to('/edit-category-product/'.$cate_pro->category_id) }}" class="active styling-edit" ui-toggle-class=""><i
+                                <a href="{{ URL::to('/edit-brand-product/'.$brand_pro->brand_id) }}" class="active styling-edit" ui-toggle-class=""><i
                                         class="fa fa-pencil-square-o text-success text-active"></i></a>
-                                <a onclick="return confirm('Bạn có muốn xóa không?')" href="{{ URL::to('/delete-category-product/'.$cate_pro->category_id) }}" class="active" ui-toggle-class="">
+                                <a onclick="return confirm('Bạn có muốn xóa không?')" href="{{ URL::to('/delete-brand-product/'.$brand_pro->brand_id) }}" class="active" ui-toggle-class="">
                                         <i class="fa fa-times text-danger text"></i>
                             </td>
                         </tr> 

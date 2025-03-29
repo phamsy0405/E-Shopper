@@ -38,16 +38,16 @@
                     <img src="images/product-details/rating.png" alt="" />
                     <form action="{{ URL::to('/save-cart') }}" method="Post">
                         {{ csrf_field() }}
-                    <span>
-                        <span>{{ number_format($value->product_price) . ' VNĐ' }}</span>
-                        <label>Số lượng:</label>
-                        <input name="qty" type="number" min="1" value="1" />
-                        <input name="productid_hidden" type="hidden"  value="{{ $value->product_id }}" />
-                        <button type="submit" class="btn btn-fefault cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            Thêm vào giỏ hàng
-                        </button>
-                    </span>
+                        <span>
+                            <span>{{ number_format($value->product_price) . ' VNĐ' }}</span>
+                            <label>Số lượng:</label>
+                            <input name="qty" type="number" min="1" value="1" />
+                            <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
+                            <button type="submit" class="btn btn-fefault cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                Thêm vào giỏ hàng
+                            </button>
+                        </span>
                     </form>
                     <p><b>Tình trạng:</b> Còn hàng</p>
                     <p><b>Điều kiện:</b> Mới 100%</p>
@@ -119,7 +119,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <img src="{{ URL::to('public/uploads/product/'.$lienquan->product_image) }}" alt="" />
+                                        <img src="{{ URL::to('public/uploads/product/' . $lienquan->product_image) }}" alt="" />
                                         <h2>{{ number_format($lienquan->product_price) }}</h2>
                                         <p>{{ ($lienquan->product_name) }}</p>
                                         <button type="button" class="btn btn-default add-to-cart"><i
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach    
+                    @endforeach
 
                 </div>
             </div>

@@ -14,6 +14,7 @@
 	<link href="{{ asset('public/frontend/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/frontend/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/frontend/css/responsive.css') }}" rel="stylesheet">
+	<link href="{{ asset('public/frontend/css/sweetalert.css') }}" rel="stylesheet">
 	<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -33,7 +34,7 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> 0353 962 629</a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
 							</ul>
 						</div>
@@ -64,7 +65,7 @@
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle usa"
 									data-toggle="dropdown">
-									USA
+									VN
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
@@ -76,7 +77,7 @@
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle usa"
 									data-toggle="dropdown">
-									DOLLAR
+									VND
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu">
@@ -92,8 +93,9 @@
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+								<li><a href="{{ URL::to('/show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ
+										hàng</a></li>
+								<li><a href="{{ URL::to('/admin') }}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
 					</div>
@@ -124,7 +126,7 @@
 								</li>
 								<li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
 								</li>
-								<li><a href="404.html">Giỏ hàng</a></li>
+								<li><a href="{{ URL::to('/show-cart') }}">Giỏ hàng</a></li>
 								<li><a href="contact-us.html">Liên hệ</a></li>
 							</ul>
 						</div>
@@ -414,14 +416,48 @@
 
 	</footer><!--/Footer-->
 
-
-
 	<script src="{{ asset('public/frontend/js/jquery.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/jquery.scrollUp.min.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/price-range.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/jquery.prettyPhoto.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/main.js') }}"></script>
+	<script src="{{ asset('public/frontend/js/sweetalert.min.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.add-to-cart').click(function () {
+				var id = $(this).data('id_product');
+				var cart_product_id = $('.cart_product_id_' + id).val();
+				var cart_product_name = $('.cart_product_name_' + id).val();
+				var cart_product_image = $('.cart_product_image_' + id).val();
+				var cart_product_price = $('.cart_product_price_' + id).val();
+				var cart_product_qty = $('.cart_product_qty_' + id).val();
+				var _token = $('input[name="_token"]').val();
+				$.ajax({
+					url: '{{ url('/add-cart-ajax') }}',
+					method: 'POST',
+					data: { cart_product_id: cart_product_id, cart_product_name: cart_product_name, cart_product_image: cart_product_image, cart_product_price: cart_product_price, cart_product_qty: cart_product_qty, _token: _token },
+					success: function (data) {
+						swal({
+							title: "Đã thêm sản phẩm vào giỏ hàng",
+							text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+							showCancelButton: true,
+							cancelButtonText: "Xem tiếp",
+							confirmButtonClass: "btn-success",
+							confirmButtonText: "Đi đến giỏ hàng",
+							closeOnConfirm: false
+						},
+							function () {
+								window.location.href = "{{url('/show-cart')}}";
+							});
+					}
+				});
+			});
+		});
+		
+
+		
+	</script>
 </body>
 
 </html>

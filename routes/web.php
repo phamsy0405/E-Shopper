@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 //frontend
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang_chu', [HomeController::class, 'index']);
@@ -56,3 +57,11 @@ Route::get('/active-product/{product_id}', [ProductController::class, 'active_pr
 
 Route::post('/save-product', [ProductController::class, 'save_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
+
+//cart
+Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
+Route::get('/show-cart', [CartController::class, 'show_cart']);
+Route::post('/update-cart', [CartController::class, 'update_cart']);
+Route::get('/delete-cart/{session_id}', [CartController::class, 'delete_cart']);
+Route::get('/delete-all-cart', [CartController::class, 'delete_all_cart']);
+

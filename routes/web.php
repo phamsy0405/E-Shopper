@@ -7,9 +7,11 @@ use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 //frontend
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang_chu', [HomeController::class, 'index']);
+Route::post('/tim-kiem', [HomeController::class, 'search']);
 
 //Danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{category_id}', [CategoryProduct::class, 'show_category_home']);
@@ -65,3 +67,10 @@ Route::post('/update-cart', [CartController::class, 'update_cart']);
 Route::get('/delete-cart/{session_id}', [CartController::class, 'delete_cart']);
 Route::get('/delete-all-cart', [CartController::class, 'delete_all_cart']);
 
+//checkout
+Route::get('/login-checkout', [CheckoutController::class, 'login_checkout']);
+Route::post('/add-customer', [CheckoutController::class, 'add_customer']);
+Route::get('/checkout', [CheckoutController::class, 'checkout']);
+Route::post('/save-checkout-customer', [CheckoutController::class, 'save_checkout_customer']);
+Route::get('/logout-checkout', [CheckoutController::class, 'logout_checkout']);
+Route::post('/login-customer', [CheckoutController::class, 'login_customer']);

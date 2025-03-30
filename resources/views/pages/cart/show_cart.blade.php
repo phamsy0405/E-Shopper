@@ -113,7 +113,18 @@
                             <li>Phí vận chuyển <span>Free</span></li>
                             <li>Thành tiền <span>$59</span></li>
                         </ul>
+                        <?php
+								$customer_id = Session::get('customer_id');
+								if($customer_id != NULL){
+								?>
+                        <a class="btn btn-default check_out" href="{{ URL::to('/checkout') }}">Thanh toán</a>
+                        <?php
+								}else{
+								?>
                         <a class="btn btn-default check_out" href="{{ URL::to('/login-checkout') }}">Thanh toán</a>
+                        <?php
+								}
+								?>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,12 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+	<style>
+		.container {
+			max-width: 100%;
+		}
+	</style>
 </head><!--/head-->
 
 <body>
@@ -88,23 +94,32 @@
 						</div>
 					</div>
 					<div class="col-sm-8">
+
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-star"></i>Danh sách yêu thích</a></li>
 								<?php
 $customer_id = Session::get('customer_id');
-if ($customer_id != NULL) {
-								?>
+$shipping_id = Session::get('shipping_id');
+
+if ($customer_id != NULL && $shipping_id != NULL) {
+?>
+								<li><a href="{{ URL::to('/payment') }}"><i class="fa fa-crosshairs"></i>Thanh Toán</a>
+								</li>
+								<?php
+} elseif ($customer_id != NULL) {
+?>
 								<li><a href="{{ URL::to('/checkout') }}"><i class="fa fa-crosshairs"></i>Thanh Toán</a>
 								</li>
 								<?php
 } else {
-								?>
+?>
 								<li><a href="{{ URL::to('login-checkout') }}"><i class="fa fa-crosshairs"></i>Thanh
 										Toán</a></li>
 								<?php
 }
-								?>
+?>
+
 								<li><a href="{{ URL::to('/show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ
 										hàng</a></li>
 								<li><a href="{{ URL::to('/login-checkout') }}"><i class="fa fa-user"></i>Tài Khoản</a>
